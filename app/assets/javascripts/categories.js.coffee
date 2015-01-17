@@ -47,6 +47,7 @@ checkTidingsIsNull = ->
     $('.title-null').removeClass('hide')
   else
     $('.title-null').addClass('hide')
+    $('.datatrash').append($('.title-null'))
 
 $(document).ready(changeCategory).on('page:load', changeCategory)
 $(document).ready(setAllCategories).on('page:load', setAllCategories)

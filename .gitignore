@@ -24,3 +24,5 @@ config/development.sphinx.conf
 /.idea
 /db/sphinx
 config/secrets.yml
+# /public/assets
+/public/images

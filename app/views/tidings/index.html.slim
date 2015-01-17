@@ -7,13 +7,13 @@
       ul.nav.nav-list
         li.list-group-item.text-center.title-null.hide
           | Пока новости отсутствуют
-        br
+          br
         - @tidings.each do |tiding|
           li.tiding.list-group-item.text-center data-id="#{tiding.id}"
             = tiding.title
             span.pull-right
               = tiding.created_at.to_s(:ru_datetime)
-      ul.nav.nav-list.datatrash
+      ul.datatrash
 
   .col-sm-6.col-md-3
     .row-fluid
@@ -35,3 +35,7 @@
                     = category.title
                   span.badge
                     = category.tidings.count
+
+sass:
+  .tiding
+    margin-bottom: 15px
