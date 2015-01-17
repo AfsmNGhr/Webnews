@@ -5,6 +5,9 @@ head
   = csrf_meta_tags
 body
   nav.navbar.navbar-default
-    .container
-  .container
-    = yield
+    .container-fluid
+      #logo.navbar-header.navbar-brand.pull-right
+        | Webnews
+  .container-fluid
+    .row
+      = yield

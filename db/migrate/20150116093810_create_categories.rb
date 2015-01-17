@@ -2,7 +2,8 @@ class CreateCategories < ActiveRecord::Migration
   def change
     create_table :categories do |t|
       t.string :title
-      t.text :text
+      t.string :preview
+      t.string :text
 
       t.timestamps null: false
     end

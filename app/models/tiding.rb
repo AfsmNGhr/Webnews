@@ -1,5 +1,5 @@
 class Tiding < ActiveRecord::Base
-  has_many :categories
+  has_and_belongs_to_many :categories
 
-  validates :title, :text, :preview, presence: true
+  validates :title, :text, presence: true
 end

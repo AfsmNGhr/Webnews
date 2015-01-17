@@ -1,11 +1,13 @@
 #
 class TidingsController < ApplicationController
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
+
   def index
     @tidings = Tiding.all
+    @categories = Category.all
   end
 
   def show
-    @tiding = Tiding.find(params[:id])
   end
 
   def new
@@ -13,8 +15,6 @@ class TidingsController < ApplicationController
   end
 
   def edit
-    @tiding = Tiding.find(params[:id])
-
     respond_to do |format|
       format.json do
         if @tiding.update!(tiding_params)
@@ -43,8 +43,6 @@ class TidingsController < ApplicationController
   end
 
   def update
-    @tiding = Tiding.find(params[:id])
-
     respond_to do |format|
       format.json do
         if @tiding.update!(tiding_params)
@@ -58,7 +56,6 @@ class TidingsController < ApplicationController
   end
 
   def delete
-    @tiding = Tiding.find(params[:id])
     @tiding.destroy
 
     respond_to do |format|
@@ -67,6 +64,10 @@ class TidingsController < ApplicationController
   end
 
   private
+
+  def set_tiding
+    @tiding = Tiding.find(params[:id])
+  end
 
   def tiding_params
     params.require(:tiding).permit(:id, :title, :text)

@@ -1,4 +1,37 @@
-.container
+.row-fluid.stretch
+  .col-xs-12.col-sm-6.col-md-9
+    .well
+      .panel.panel-primary
+        .panel-heading.text-center.title-news
+          | Все Новости
+      ul.nav.nav-list
+        li.list-group-item.text-center.title-null.hide
+          | Пока новости отсутствуют
+        br
+        - @tidings.each do |tiding|
+          li.tiding.list-group-item.text-center data-id="#{tiding.id}"
+            = tiding.title
+            span.pull-right
+              = tiding.created_at.to_s(:ru_datetime)
+      ul.nav.nav-list.datatrash
 
-coffee:
-  new App(el: $('.container'))
+  .col-sm-6.col-md-3
+    .row-fluid
+      .well.sidebar-nav
+        ul.nav.nav-list.filters
+          li.list-group-item
+            | Поиск
+        br
+          div style='max-height: 400px; overflow-y: auto; overflow-x: hidden;'
+            ul.nav.nav-list.list-categories
+              li.list-group-item.categories data-ids="#{@tidings.pluck(:id)}"
+                span
+                  | Все категории
+                span.badge
+                  = @tidings.count
+              - @categories.each do |category|
+                li.list-group-item.category data-id="#{category.id}" data-title="#{category.title}" data-ids="#{category.tidings.pluck(:id)}"
+                  span
+                    = category.title
+                  span.badge
+                    = category.tidings.count

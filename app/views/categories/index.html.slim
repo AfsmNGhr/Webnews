@@ -1,0 +1,26 @@
+h1 Listing categories
+
+.row-fluid
+  .col-xs-12.col-sm-6.col-md-9
+    table.center-block
+      thead
+        tr
+          th Title
+          th Text
+          th
+          th
+          th
+
+      tbody
+        - @categories.each do |category|
+          tr
+            td = category.title
+            td = category.text
+            td = link_to 'Show', category
+            td = link_to 'Edit', edit_category_path(category)
+            td = link_to 'Destroy', category,
+              data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Category', new_category_path

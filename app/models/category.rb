@@ -1,6 +1,5 @@
 class Category < ActiveRecord::Base
-  belongs_to :tidings
+  has_and_belongs_to_many :tidings
 
-  validates :title, uniqueness: true
-  validates :title, :tidings_ids, presence: true
+  validates :title, :text, presence: true
 end
