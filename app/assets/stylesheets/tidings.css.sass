@@ -1,2 +1,20 @@
 .tiding
-  margin: 5px
+  margin: 10px
+
+.listing
+  max-height: 400px
+  overflow: auto
+
+.a, a:hover, a:focus
+  text-decoration: none !important
+
+.category, .categories
+  &:hover
+    background: #337ab7
+    color: #fff
+    z-index: 2
+    border-color: #337ab7
+    cursor: pointer
+  &:hover > .badge
+    background: #fff
+    color: #337ab7

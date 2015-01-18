@@ -4,15 +4,19 @@
       .panel.panel-primary
         .panel-heading.text-center.title-news
           | Все Новости
-      ul.nav.nav-list
+      ul.nav.nav-list.list-news
         li.list-group-item.text-center.title-null.hide
-          | Пока новости отсутствуют
+          | Пока в этой категории новости отсутствуют
+          br
+          span
+            = link_to "Добавить новость", new_tiding_path
           br
         - @tidings.each do |tiding|
           li.tiding.list-group-item.text-center data-id="#{tiding.id}"
-            = tiding.title
-            span.pull-right
-              = tiding.created_at.to_s(:ru_datetime)
+            .row-fluid
+              = tiding.title
+              span.pull-right
+                = tiding.created_at.to_s(:ru_datetime)
       ul.datatrash
 
   .col-sm-6.col-md-3
@@ -22,7 +26,7 @@
           li.list-group-item
             | Поиск
         br
-          div style='max-height: 400px; overflow-y: auto; overflow-x: hidden;'
+          div.listing
             ul.nav.nav-list.list-categories
               li.list-group-item.categories data-ids="#{@tidings.pluck(:id)}"
                 span
@@ -35,7 +39,3 @@
                     = category.title
                   span.badge
                     = category.tidings.count
-
-sass:
-  .tiding
-    margin-bottom: 15px

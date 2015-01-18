@@ -6,7 +6,8 @@ initialize = ->
 
 changeCategory = ->
   $(document).on 'click', '.category', ->
-    $(document).ready(resetCategories).on('page:load', resetCategories)
+    $(document).ready(resetCategories).on('page:load',
+      resetCategories)
     $(this).addClass('active')
     localStorage.setItem('category', $(this).data('id'))
     $('.title-news').html($(this).data('title'))
@@ -15,7 +16,8 @@ changeCategory = ->
 
 setAllCategories = ->
   $(document).on 'click', '.categories', ->
-    $(document).ready(resetCategories).on('page:load', resetCategories)
+    $(document).ready(resetCategories).on('page:load',
+      resetCategories)
     $(this).addClass('active')
     localStorage.setItem('category', 'all')
     $('.title-news').html('Все Новоcти')
@@ -37,6 +39,7 @@ checkTidingsInCategory = ->
   $('.tiding').each (n, tiding) =>
     if _.contains @tiding_ids, ($(tiding).data('id'))
       $(tiding).show()
+      $('.list-news').append($(tiding))
     else
       $(tiding).hide()
       $('.datatrash').append($(tiding))
@@ -45,6 +48,7 @@ checkTidingsIsNull = ->
   count = $('.list-categories').find('.active')
   if count.data('ids').length is 0
     $('.title-null').removeClass('hide')
+    $('.list-news').append($('.title-null'))
   else
     $('.title-null').addClass('hide')
     $('.datatrash').append($('.title-null'))
