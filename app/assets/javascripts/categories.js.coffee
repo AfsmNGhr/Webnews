@@ -45,14 +45,20 @@ checkTidingsInCategory = ->
       $('.datatrash').append($(tiding))
 
 checkTidingsIsNull = ->
-  count = $('.list-categories').find('.active')
-  if count.data('ids').length is 0
-    $('.title-null').removeClass('hide')
-    $('.list-news').append($('.title-null'))
-  else
-    $('.title-null').addClass('hide')
-    $('.datatrash').append($('.title-null'))
+  if $('.list-categories').find('.active')?
+    count = $('.list-categories').find('.active')
+    if count.data('ids').length is 0
+      $('.title-null').removeClass('hide')
+      $('.list-news').append($('.title-null'))
+      $('.pag-tidings').hide()
+    else
+      $('.title-null').addClass('hide')
+      $('.datatrash').append($('.title-null'))
+      $('.pag-tidings').show()
 
 $(document).ready(changeCategory).on('page:load', changeCategory)
 $(document).ready(setAllCategories).on('page:load', setAllCategories)
 $(document).ready(initialize).on('page:load', initialize)
+
+$(document).on 'click', 'a', ->
+  $(document).ready(initialize).on('page:load', initialize)

@@ -9,9 +9,15 @@
   .field
     = f.label :title
     = f.text_field :title
+    .field
+    = f.label :preview
+    = f.text_field :preview
   .field
     = f.label :text
     = f.text_field :text
-  .field
+  .field.image-form
+    = f.label :image, "Attach image"
     = f.attachment_field :image, direct: true
+    = f.label :remote_image_url, "Or specify URL"
+    = f.text_field :remote_image_url
   .actions = f.submit

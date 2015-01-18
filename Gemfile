@@ -36,8 +36,9 @@ gem 'slim'
 gem 'slim-rails'
 gem 'jquery-turbolinks'
 gem 'underscore-rails'
-gem "mini_magick"
-gem "refile", require: ["refile/rails", "refile/image_processing"]
+gem 'mini_magick'
+gem 'refile', require: ['refile/rails', 'refile/image_processing']
+gem 'will_paginate'
 
 group :development, :test do
   gem 'thin'

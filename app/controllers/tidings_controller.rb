@@ -3,8 +3,14 @@ class TidingsController < ApplicationController
   before_action :set_tiding, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tidings = Tiding.all
+    @tidings = Tiding.all.paginate(:page => params[:page], :per_page => 20)
+    @tidings_all = Tiding.all
     @categories = Category.all
+    @tags = Tag.all
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def show
@@ -56,7 +62,7 @@ class TidingsController < ApplicationController
       if @tiding.update(tiding_params)
         format.html do
           redirect_to @tiding,
-                      notice: 'Tining was successfully updated.'
+                      notice: 'Tiding was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @tiding }
       else
@@ -75,7 +81,7 @@ class TidingsController < ApplicationController
     respond_to do |format|
       format.html do
         redirect_to tidings_url,
-                    notice: 'Tining was successfully destroyed.'
+                    notice: 'Tiding was successfully destroyed.'
       end
       format.json { head :ok }
     end
@@ -88,6 +94,7 @@ class TidingsController < ApplicationController
   end
 
   def tiding_params
-    params.require(:tiding).permit(:id, :title, :text, :image)
+    params.require(:tiding).permit(:id, :title, :text, :preview,
+                                   :image, :remote_image_url)
   end
 end

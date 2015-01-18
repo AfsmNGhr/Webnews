@@ -11,37 +11,54 @@
           span
             = link_to "Добавить новость", new_tiding_path
           br
-        - @tidings.each do |tiding|
-          li.tiding.list-group-item data-id="#{tiding.id}"
-            .row-fluid
-              .container
-                span
-                  h6.datetime
-                    = tiding.created_at.to_s(:ru_datetime)
-                h3.title
-                  = tiding.title
-                br
-                  = image_tag attachment_url(tiding, :image, :fill, 700, 700)
-                br
-                span
-                  h6.header.pull-left
-                    = link_to "Подробнее", tiding
+          #tidings
+            - @tidings.each do |tiding|
+              li.tiding.list-group-item data-id="#{tiding.id}"
+                .row-fluid
+                  .container
+                    h6.tag
+                      = tiding.created_at.to_s(:ru_datetime)
+                    h3.title
+                      = tiding.title
+                    h3.tag
+                      - if tiding.categories.present?
+                        i.glyphicon.glyphicon-file
+                          - tiding.categories.limit(5).each do |category|
+                            span.margin-left
+                              = category.title
+                          - if tiding.tags.present?
+                            span.margin-left
+                              i.glyphicon.glyphicon-tags
+                                - tiding.tags.limit(5).each do |tag|
+                                  span.margin-left
+                                    = tag.title
+                    h3.title
+                      = tiding.preview
+                    br
+                      - if tiding.image.present?
+                        = image_tag attachment_url(tiding, :image, :fill, 700, 700)
+                    br
+                      span
+                        h6.header.pull-left
+                          = link_to "Подробнее", tiding
       ul.datatrash
+        span.header.pag-tidings
+          = will_paginate @tidings
 
   .col-sm-6.col-md-3
     .row-fluid
-      .well.sidebar-nav
-        ul.nav.nav-list.filters
+      .well.sidebar-nav.rigth-panel
+        ul.nav.nav-list.new-filters
           li.list-group-item
             | Поиск
         br
-          div.listing
+          .listing
             ul.nav.nav-list.list-categories
-              li.list-group-item.categories data-ids="#{@tidings.pluck(:id)}"
+              li.list-group-item.categories data-ids="#{@tidings_all.pluck(:id)}"
                 span
-                  | Все категории
+                  | Все Новости
                 span.badge
-                  = @tidings.count
+                  = @tidings_all.count
               - @categories.each do |category|
                 li.list-group-item.category data-id="#{category.id}" data-title="#{category.title}" data-ids="#{category.tidings.pluck(:id)}"
                   span
