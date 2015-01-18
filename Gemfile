@@ -31,13 +31,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3.1'
 gem 'slim'
 gem 'slim-rails'
 gem 'jquery-turbolinks'
 gem 'underscore-rails'
+gem "mini_magick"
+gem "refile", require: ["refile/rails", "refile/image_processing"]
 
 group :development, :test do
+  gem 'thin'
   gem 'pry'
   gem 'awesome_print'
   gem 'web-console', '~> 2.0'

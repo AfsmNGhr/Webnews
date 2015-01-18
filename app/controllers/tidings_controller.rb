@@ -1,6 +1,6 @@
 #
 class TidingsController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :set_tiding, only: [:show, :edit, :update, :destroy]
 
   def index
     @tidings = Tiding.all
@@ -11,15 +11,20 @@ class TidingsController < ApplicationController
   end
 
   def new
-    @tiding = Tiding.new(params[:tiding])
+    @tiding = Tiding.new
   end
 
   def edit
     respond_to do |format|
-      format.json do
-        if @tiding.update!(tiding_params)
-          head :ok
-        else
+      if @tiding.update!(tiding_params)
+        format.html do
+          redirect_to @tiding,
+          notice: 'Tiding was successfully updated.'
+        end
+        format.json { head :ok }
+      else
+        format.html { render :edit }
+        format.json do
           render json: @tiding.errors,
                  status: :unprocessable_entity
         end
@@ -28,13 +33,17 @@ class TidingsController < ApplicationController
   end
 
   def create
-    @tiding = Tiding.new(params[:tiding])
-
+    @tiding = Tiding.new(tiding_params)
     respond_to do |format|
-      format.json do
-        if @tiding.save
-          render json: @tiding, status: :created
-        else
+      if @tiding.save!
+        format.html do
+          redirect_to @tiding,
+                      notice: 'Tiding was successfully created.'
+        end
+        format.json { render :show, status: :created, location: @tiding }
+      else
+        format.html { render :new }
+        format.json do
           render json: @tiding.errors,
                  status: :unprocessable_entity
         end
@@ -44,10 +53,15 @@ class TidingsController < ApplicationController
 
   def update
     respond_to do |format|
-      format.json do
-        if @tiding.update!(tiding_params)
-          render json: @tiding, status: :ok
-        else
+      if @tiding.update(tiding_params)
+        format.html do
+          redirect_to @tiding,
+                      notice: 'Tining was successfully updated.'
+        end
+        format.json { render :show, status: :ok, location: @tiding }
+      else
+        format.html { render :edit }
+        format.json do
           render json: @tiding.errors,
                  status: :unprocessable_entity
         end
@@ -59,6 +73,10 @@ class TidingsController < ApplicationController
     @tiding.destroy
 
     respond_to do |format|
+      format.html do
+        redirect_to tidings_url,
+                    notice: 'Tining was successfully destroyed.'
+      end
       format.json { head :ok }
     end
   end
@@ -70,6 +88,6 @@ class TidingsController < ApplicationController
   end
 
   def tiding_params
-    params.require(:tiding).permit(:id, :title, :text)
+    params.require(:tiding).permit(:id, :title, :text, :image)
   end
 end

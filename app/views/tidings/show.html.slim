@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @tiding.title
+p
+  strong Text:
+  = @tiding.text
+p
+  strong Image:
+  = image_tag attachment_url(@tiding, :image, :fill, 300, 300)
+
+= link_to 'Edit', edit_tiding_path(@tiding)
+'|
+= link_to 'Back', tidings_path

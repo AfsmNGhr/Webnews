@@ -6,17 +6,26 @@
           | Все Новости
       ul.nav.nav-list.list-news
         li.list-group-item.text-center.title-null.hide
-          | Пока в этой категории новости отсутствуют
-          br
+          p
+            | Пока в этой категории новости отсутствуют
           span
             = link_to "Добавить новость", new_tiding_path
           br
         - @tidings.each do |tiding|
-          li.tiding.list-group-item.text-center data-id="#{tiding.id}"
+          li.tiding.list-group-item data-id="#{tiding.id}"
             .row-fluid
-              = tiding.title
-              span.pull-right
-                = tiding.created_at.to_s(:ru_datetime)
+              .container
+                span
+                  h6.datetime
+                    = tiding.created_at.to_s(:ru_datetime)
+                h3.title
+                  = tiding.title
+                br
+                  = image_tag attachment_url(tiding, :image, :fill, 700, 700)
+                br
+                span
+                  h6.header.pull-left
+                    = link_to "Подробнее", tiding
       ul.datatrash
 
   .col-sm-6.col-md-3
