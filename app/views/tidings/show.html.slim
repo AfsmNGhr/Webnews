@@ -1,28 +1,35 @@
 .row-fluid.stretch
   .well
+    .panel.panel-primary
+      .panel-heading.text-center
+        = @tiding.title
     p#notice = notice
-    .media
-      .media-body
-        .media-heading
-          h6.tag
-            = @tiding.created_at.to_s(:ru_datetime)
-          h3.title
-            = @tiding.title
-          h3.tag
-            - if @tiding.categories.present?
-              i.glyphicon.glyphicon-file
-              - @tiding.categories.each do |category|
-                span.margin-left
-                  = category.title
-            - if @tiding.tags.present?
-              span.margin-left
-                i.glyphicon.glyphicon-tags
-                - @tiding.tags.each do |tag|
+    li.list-group-item
+      ul.media-list
+        li.media
+          .media-body
+            h4.media-heading
+              h6.tag
+                = @tiding.created_at.to_s(:ru_datetime)
+              h3.tag
+                - if @tiding.categories.present?
+                  i.glyphicon.glyphicon-file
+                  - @tiding.categories.each do |category|
+                    span.margin-left
+                      = category.title
+                - if @tiding.tags.present?
                   span.margin-left
-                    = tag.title
-      br
-      .media-left
-        = image_tag attachment_url(@tiding, :image, :fill, 700, 700)
+                    i.glyphicon.glyphicon-tags
+                    - @tiding.tags.each do |tag|
+                      span.margin-left
+                        = tag.title
+              h3.title
+                = @tiding.preview
+          li.media
+            .media-left
+              = image_tag attachment_url(@tiding, :image, :fill, 500, 500)
+            .media-body
+              = @tiding.text
     br
     .actions
       .pull-right

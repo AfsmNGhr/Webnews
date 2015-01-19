@@ -1,7 +1,10 @@
-h1 Editing tiding
-
-== render 'form'
-
-= link_to 'Show', @tiding
-'|
-= link_to 'Back', tidings_path
+.row-fluid.stretch
+  .panel.panel-primary
+    .panel-heading.text-center
+      | Редактирование новости
+  == render 'form'
+  .col-xs-12.col-sm-6.col-md-9
+    .well
+      .pull-right
+        = link_to 'Перейти', @tiding
+      = link_to 'Назад', tidings_path

@@ -1,29 +1,58 @@
 .row-fluid
   = form_for @tiding do |f|
-    - if @tiding.errors.any?
-      #error_explanation
-        h2 = "#{pluralize(@tiding.errors.count, "error")} prohibited this tiding from being saved:"
-        ul
-          - @tiding.errors.full_messages.each do |message|
-            li = message
-    h5.tag
-    .input-group
-      = f.label :title
-      = f.text_field :title
-    .field
-      = f.label :preview
-      = f.text_field :preview
-    .field
-      = f.label :text
-      = f.text_field :text
-    .field
-      = f.label :category_ids, 'Категории'
-      = f.collection_select :category_ids, Category.all, :id, :title, prompt: 'Выберите категорию'
-    .form-group
-      .field.image-form
-        = f.label :image, "Attach image"
-        = f.attachment_field :image, direct: true
-        p.help-block
-          | Добавьте к новости изображение
-    .actions.pull-right
-      = f.submit
+    .col-xs-12.col-sm-6.col-md-9
+      .well
+        - if @tiding.errors.any?
+          #error_explanation
+            h2 = "#{pluralize(@tiding.errors.count, "error")} prohibited this tiding from being saved:"
+            ul
+              - @tiding.errors.full_messages.each do |message|
+                li = message
+        li.list-group-item
+          br
+          ul.media-list
+            li.media
+              .media-body
+                h4.media-heading.title
+                  = f.label :title, 'Название'
+                br
+                .margin-left
+                  = f.text_area :title, cols: 130, rows: 3
+            li.media
+              .media-body
+                h4.media-heading.title
+                  = f.label :preview, 'Анонс'
+                br
+                .margin-left
+                  = f.text_area :preview, cols: 130, rows: 3
+            li.media
+              .media-body
+                h4.media-heading.title
+                  = f.label :text, 'Текст'
+                br
+                .margin-left
+                  = f.text_area :text, cols: 130, rows: 30
+        br
+        .actions
+          = f.submit 'Обновить новость'
+
+    .col-sm-6.col-md-3
+      .well.sidebar-nav
+        ul.media-list
+          li.media
+            .media-body
+              .field
+                = f.label :category_ids, 'Категории'
+              = f.collection_select :category_ids, Category.all, :id, :title, prompt: 'Выберите категории', multiple: true
+          li.media
+            .media-body
+              .field
+                = f.label :tag_ids, 'Теги'
+            = f.collection_select :tag_ids, Tag.all, :id, :title, prompt: 'Выберите теги', multiple: true
+          li.media
+            .media-body
+              .field.image-form
+                = f.label :image, "Изображение"
+                = f.attachment_field :image, direct: true
+          p.help-block
+            | Добавьте к новости изображение

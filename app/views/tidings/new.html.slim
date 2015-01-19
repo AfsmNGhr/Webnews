@@ -1,10 +1,8 @@
 .row-fluid.stretch
-  .col-xs-12.col-sm-6.col-md-9
+  .well
     .panel.panel-primary
       .panel-heading.text-center
         | Новая новость
-    .well
-      li.tiding.list-group-item
-        == render 'form'
-
-      = link_to 'Назад', tidings_path
+    li.tiding.list-group-item
+      == render 'form'
+    = link_to 'Назад', tidings_path

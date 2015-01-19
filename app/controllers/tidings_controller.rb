@@ -78,7 +78,7 @@ class TidingsController < ApplicationController
   end
 
   def tiding_params
-    params.require(:tiding).permit(:id, :title, :text, :preview,
-                                   :image, :remote_image_url)
+    params.require(:tiding).permit(:id, :title, :text, :preview, :category_ids,
+                                   :tag_ids, :image, :remote_image_url)
   end
 end
