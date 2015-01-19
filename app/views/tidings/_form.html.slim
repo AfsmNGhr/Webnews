@@ -1,23 +1,29 @@
-= form_for @tiding do |f|
-  - if @tiding.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@tiding.errors.count, "error")} prohibited this category from being saved:"
-      ul
-        - @tiding.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :title
-    = f.text_field :title
+.row-fluid
+  = form_for @tiding do |f|
+    - if @tiding.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@tiding.errors.count, "error")} prohibited this tiding from being saved:"
+        ul
+          - @tiding.errors.full_messages.each do |message|
+            li = message
+    h5.tag
+    .input-group
+      = f.label :title
+      = f.text_field :title
     .field
-    = f.label :preview
-    = f.text_field :preview
-  .field
-    = f.label :text
-    = f.text_field :text
-  .field.image-form
-    = f.label :image, "Attach image"
-    = f.attachment_field :image, direct: true
-    = f.label :remote_image_url, "Or specify URL"
-    = f.text_field :remote_image_url
-  .actions = f.submit
+      = f.label :preview
+      = f.text_field :preview
+    .field
+      = f.label :text
+      = f.text_field :text
+    .field
+      = f.label :category_ids, 'Категории'
+      = f.collection_select :category_ids, Category.all, :id, :title, prompt: 'Выберите категорию'
+    .form-group
+      .field.image-form
+        = f.label :image, "Attach image"
+        = f.attachment_field :image, direct: true
+        p.help-block
+          | Добавьте к новости изображение
+    .actions.pull-right
+      = f.submit

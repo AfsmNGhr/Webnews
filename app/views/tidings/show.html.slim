@@ -1,15 +1,30 @@
-p#notice = notice
-
-p
-  strong Title:
-  = @tiding.title
-p
-  strong Text:
-  = @tiding.text
-p
-  strong Image:
-  = image_tag attachment_url(@tiding, :image, :fill, 300, 300)
-
-= link_to 'Edit', edit_tiding_path(@tiding)
-'|
-= link_to 'Back', tidings_path
+.row-fluid.stretch
+  .well
+    p#notice = notice
+    .media
+      .media-body
+        .media-heading
+          h6.tag
+            = @tiding.created_at.to_s(:ru_datetime)
+          h3.title
+            = @tiding.title
+          h3.tag
+            - if @tiding.categories.present?
+              i.glyphicon.glyphicon-file
+              - @tiding.categories.each do |category|
+                span.margin-left
+                  = category.title
+            - if @tiding.tags.present?
+              span.margin-left
+                i.glyphicon.glyphicon-tags
+                - @tiding.tags.each do |tag|
+                  span.margin-left
+                    = tag.title
+      br
+      .media-left
+        = image_tag attachment_url(@tiding, :image, :fill, 700, 700)
+    br
+    .actions
+      .pull-right
+        = link_to 'Редактировать', edit_tiding_path(@tiding)
+      = link_to 'Назад', tidings_path

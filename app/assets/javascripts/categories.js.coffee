@@ -1,8 +1,9 @@
 initialize = ->
-  if localStorage.category? and parseInt(localStorage.category)
-    $(".category[data-id=#{localStorage.category}]").click()
-  else
-    $('.categories').click()
+  if location.pathname is '/' or '/tidings'
+    if localStorage.category? and parseInt(localStorage.category)
+      $(".category[data-id=#{localStorage.category}]").click()
+    else
+      $('.categories').click()
 
 changeCategory = ->
   $(document).on 'click', '.category', ->
@@ -45,7 +46,7 @@ checkTidingsInCategory = ->
       $('.datatrash').append($(tiding))
 
 checkTidingsIsNull = ->
-  if $('.list-categories').find('.active')?
+  if location.pathname is '/' or '/tidings'
     count = $('.list-categories').find('.active')
     if count.data('ids').length is 0
       $('.title-null').removeClass('hide')
@@ -59,6 +60,5 @@ checkTidingsIsNull = ->
 $(document).ready(changeCategory).on('page:load', changeCategory)
 $(document).ready(setAllCategories).on('page:load', setAllCategories)
 $(document).ready(initialize).on('page:load', initialize)
-
 $(document).on 'click', 'a', ->
   $(document).ready(initialize).on('page:load', initialize)

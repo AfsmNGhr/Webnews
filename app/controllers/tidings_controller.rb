@@ -21,21 +21,6 @@ class TidingsController < ApplicationController
   end
 
   def edit
-    respond_to do |format|
-      if @tiding.update!(tiding_params)
-        format.html do
-          redirect_to @tiding,
-          notice: 'Tiding was successfully updated.'
-        end
-        format.json { head :ok }
-      else
-        format.html { render :edit }
-        format.json do
-          render json: @tiding.errors,
-                 status: :unprocessable_entity
-        end
-      end
-    end
   end
 
   def create
@@ -75,9 +60,8 @@ class TidingsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @tiding.destroy
-
     respond_to do |format|
       format.html do
         redirect_to tidings_url,
