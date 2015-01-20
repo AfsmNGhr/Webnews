@@ -1,9 +1,10 @@
 #
 class TidingsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show]
   before_action :set_tiding, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tidings = Tiding.all.paginate(:page => params[:page], :per_page => 20)
+    @tidings = Tiding.all# .paginate(:page => params[:page], :per_page => 20)
     @tidings_all = Tiding.all
     @categories = Category.all
     @tags = Tag.all

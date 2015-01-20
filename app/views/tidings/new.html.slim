@@ -1,8 +1,8 @@
 .row-fluid.stretch
-  .well
-    .panel.panel-primary
-      .panel-heading.text-center
-        | Новая новость
-    li.tiding.list-group-item
-      == render 'form'
-    = link_to 'Назад', tidings_path
+  .panel.panel-primary
+    .panel-heading.text-center
+      | Новая новость
+  == render 'form'
+  .col-xs-12.col-sm-6.col-md-9
+    .well
+      = link_to 'Назад', tidings_path

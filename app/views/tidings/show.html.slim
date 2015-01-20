@@ -28,7 +28,7 @@
           li.media
             .media-left
               = image_tag attachment_url(@tiding, :image, :fill, 500, 500)
-            .media-body
+            .media-body style='white-space: pre-wrap;'
               = @tiding.text
     br
     .actions

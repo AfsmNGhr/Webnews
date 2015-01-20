@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
+gem 'jquery-turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -31,14 +32,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'bootstrap-sass', '~> 3.3.1'
-gem 'slim'
-gem 'slim-rails'
-gem 'jquery-turbolinks'
-gem 'underscore-rails'
-gem 'mini_magick'
-gem 'refile', require: ['refile/rails', 'refile/image_processing']
-gem 'will_paginate'
+  gem 'bootstrap-sass', '~> 3.3.1'
+  gem 'slim'
+  gem 'slim-rails'
+  gem 'chosen-rails'
+  gem 'underscore-rails'
+  gem 'mini_magick'
+  gem 'refile', require: ['refile/rails', 'refile/image_processing']
+  gem 'will_paginate'
+  gem 'devise'
+  gem 'simple_form'
 
 group :development, :test do
   gem 'thin'

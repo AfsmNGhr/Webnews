@@ -1,13 +1,28 @@
 head
   title Webnews
-  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+  = stylesheet_link_tag 'application',
+    media: 'all', 'data-turbolinks-track' => true
   = javascript_include_tag 'application', 'data-turbolinks-track' => true
   = csrf_meta_tags
 body
   nav.navbar.navbar-default
     .container-fluid
-      #logo.navbar-header.navbar-brand.pull-right
-        | Webnews
+      ul.nav.navbar-nav
+        #logo.navbar-header.navbar-brand
+          span
+            | Webnews
+      ul.nav.navbar-header.navbar-brand
+        span
+          = link_to tiding_path
+      ul.nav.navbar-header.navbar-brand.navbar-right
+        - if admin_signed_in?
+          span
+            = current_admin.email
+          span.margin-left
+            = link_to 'Выйти', destroy_admin_session_path, :method => :delete
+        - else
+          span
+            = link_to 'Войти', new_admin_session_path
   .container-fluid
     #content
       = yield

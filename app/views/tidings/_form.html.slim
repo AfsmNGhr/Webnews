@@ -1,10 +1,10 @@
 .row-fluid
-  = form_for @tiding do |f|
+  = simple_form_for @tiding do |f|
     .col-xs-12.col-sm-6.col-md-9
       .well
         - if @tiding.errors.any?
           #error_explanation
-            h2 = "#{pluralize(@tiding.errors.count, "error")} prohibited this tiding from being saved:"
+            h2 = "#{pluralize(@tiding.errors.count, "error")}"
             ul
               - @tiding.errors.full_messages.each do |message|
                 li = message
@@ -17,23 +17,23 @@
                   = f.label :title, 'Название'
                 br
                 .margin-left
-                  = f.text_area :title, cols: 130, rows: 3
+                  = f.text_area :title, cols: 129, rows: 3
             li.media
               .media-body
                 h4.media-heading.title
                   = f.label :preview, 'Анонс'
                 br
                 .margin-left
-                  = f.text_area :preview, cols: 130, rows: 3
+                  = f.text_area :preview, cols: 129, rows: 3
             li.media
               .media-body
                 h4.media-heading.title
                   = f.label :text, 'Текст'
                 br
                 .margin-left
-                  = f.text_area :text, cols: 130, rows: 30
+                  = f.text_area :text, cols: 129, rows: 30
         br
-        .actions
+        .form-actions
           = f.submit 'Обновить новость'
 
     .col-sm-6.col-md-3
@@ -42,17 +42,19 @@
           li.media
             .media-body
               .field
-                = f.label :category_ids, 'Категории'
-              = f.collection_select :category_ids, Category.all, :id, :title, prompt: 'Выберите категории', multiple: true
+                = f.label :categories, 'Категории'
+                .tiding-select
+                  = f.collection_select :category_ids, Category.all, :id, :title, { :multiple => true }
           li.media
             .media-body
               .field
-                = f.label :tag_ids, 'Теги'
-            = f.collection_select :tag_ids, Tag.all, :id, :title, prompt: 'Выберите теги', multiple: true
+                = f.label :tags, 'Теги'
+                .tiding-select
+                  = f.collection_select :tag_ids, Tag.all, :id, :title, { :multiple => true }
           li.media
             .media-body
               .field.image-form
                 = f.label :image, "Изображение"
-                = f.attachment_field :image, direct: true
+              = f.attachment_field :image, direct: true
           p.help-block
             | Добавьте к новости изображение

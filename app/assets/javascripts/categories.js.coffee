@@ -1,5 +1,7 @@
 initialize = ->
   if location.pathname is '/' or '/tidings'
+    if localStorage.tag?
+      $(".one-tag[data-id=#{localStorage.tag}]").click()
     if localStorage.category? and parseInt(localStorage.category)
       $(".category[data-id=#{localStorage.category}]").click()
     else
@@ -25,7 +27,8 @@ setAllCategories = ->
     $(document).ready(checkTidings).on('page:load',
       checkTidings)
 
-resetCategories = ->
+@resetCategories = ->
+  $('.one-tag').removeClass('active')
   $('.category').removeClass('active')
   $('.categories').removeClass('active')
 
@@ -51,11 +54,11 @@ checkTidingsIsNull = ->
     if count.data('ids').length is 0
       $('.title-null').removeClass('hide')
       $('.list-news').append($('.title-null'))
-      $('.pag-tidings').hide()
+      $('.page-tidings').hide()
     else
       $('.title-null').addClass('hide')
       $('.datatrash').append($('.title-null'))
-      $('.pag-tidings').show()
+      $('.page-tidings').show()
 
 $(document).ready(changeCategory).on('page:load', changeCategory)
 $(document).ready(setAllCategories).on('page:load', setAllCategories)

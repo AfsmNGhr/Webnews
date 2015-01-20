@@ -1,5 +1,6 @@
 #
 class TagsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -17,18 +18,19 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.new(tags_params)
+    @tag = Tag.new(tag_params)
 
     respond_to do |format|
       if @tag.save!
         format.html do
+          redirect_to @tag,
           notice: 'Tag was successfully created.'
         end
-        format.json { status: :created, location: @tag }
+        format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new }
         format.json do
-          render json: @category.errors,
+          render json: @tag.errors,
                  status: :unprocessable_entity
         end
       end
@@ -39,9 +41,10 @@ class TagsController < ApplicationController
     respond_to do |format|
       if @tag.update(tag_params)
         format.html do
+          redirect_to @tag,
           notice: 'Tag was successfully updated.'
         end
-        format.json { status: :ok, location: @tag }
+        format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
         format.json do
@@ -56,6 +59,7 @@ class TagsController < ApplicationController
     @tag.destroy
     respond_to do |format|
       format.html do
+        redirect_to tags_url,
         notice: 'Tag was successfully destroyed.'
       end
       format.json { head :no_content }

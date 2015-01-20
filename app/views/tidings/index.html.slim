@@ -42,8 +42,8 @@
                         h6.header.pull-left
                           = link_to "Подробнее", tiding
       ul.datatrash
-        span.header.pag-tidings
-          = will_paginate @tidings
+        span.header.page-tidings
+          / = will_paginate @tidings
 
   .col-sm-6.col-md-3
     .row-fluid
@@ -51,6 +51,11 @@
         ul.nav.nav-list.new-filters
           li.list-group-item
             | Поиск
+        br
+        ul.nav.nav-list
+          li.list-group-item
+            span
+              | Категории
         br
           .listing
             ul.nav.nav-list.list-categories
@@ -65,3 +70,18 @@
                     = category.title
                   span.badge
                     = category.tidings.count
+        br
+            ul.nav.nav-list
+              li.list-group-item
+                span
+                  | Теги
+        br
+            ul.nav.nav-list.list-tags
+              .listing
+                - if @tags.present?
+                  - @tags.each do |tag|
+                    li.list-group-item.one-tag data-id="#{tag.id}" data-title="#{tag.title}" data-ids="#{tag.tidings.pluck(:id)}"
+                      span
+                        = tag.title
+                      span.badge
+                        = tag.tidings.count
