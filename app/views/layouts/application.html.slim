@@ -13,7 +13,11 @@ body
             | Webnews
       ul.nav.navbar-header.navbar-brand
         span
-          = link_to tiding_path
+          = link_to 'Новости', tidings_path
+        span.margin-left
+          = link_to 'Категории', categories_path
+        span.margin-left
+          = link_to 'Теги', tags_path
       ul.nav.navbar-header.navbar-brand.navbar-right
         - if admin_signed_in?
           span
