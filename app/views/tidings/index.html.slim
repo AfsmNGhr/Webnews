@@ -85,3 +85,7 @@
                         = tag.title
                       span.badge
                         = tag.tidings.count
+coffee:
+  CategoriesContr = ->
+    new App.Categories(el: $('.stretch'))
+  $(document).ready(CategoriesContr).on('page:load', CategoriesContr)

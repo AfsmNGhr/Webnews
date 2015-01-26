@@ -8,10 +8,6 @@ class TidingsController < ApplicationController
     @tidings_all = Tiding.all
     @categories = Category.all
     @tags = Tag.all
-    respond_to do |format|
-      format.js
-      format.html
-    end
   end
 
   def show

@@ -1,4 +1,4 @@
 json.array!(@categories) do |category|
   json.extract! category, :id, :title, :text
-  json.url category_url(category, format: :json)
+  json.tiding_ids category.tidings.pluck(:id)
 end
