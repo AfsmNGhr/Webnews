@@ -35,13 +35,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
   gem 'bootstrap-sass', '~> 3.3.1'
   gem 'slim'
   gem 'slim-rails'
+  gem 'spine-rails'
+  gem 'json2-rails'
+  gem 'eco'
   gem 'chosen-rails'
   gem 'underscore-rails'
   gem 'mini_magick'
   gem 'refile', require: ['refile/rails', 'refile/image_processing']
   gem 'will_paginate'
   gem 'devise'
-  gem 'simple_form'
 
 group :development, :test do
   gem 'thin'
